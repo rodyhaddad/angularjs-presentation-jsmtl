@@ -1,0 +1,92 @@
+<script src="bootstrapDemo.js"></script>
+<script src="https://code.angularjs.org/1.2.14/angular-animate.js"></script>
+
+<script type="text/javascript">
+
+  angular.module('myApp', ['demo.handler', 'ngAnimate'])
+    .directive('cityCard', function () {
+      return {
+        templateUrl: 'partial.cityCard.html',
+        scope: {cityInfo: '=information'},
+        restrict: 'EA'
+      };
+    })
+    .directive('showOnly', function () {
+      return {
+        link: function (scope, el, attr) {
+          scope.$watch(attr.showOnly, function (value) {
+            if (value) 
+              el.css('display', 'block')
+            else 
+              el.css('display', 'none');
+          });
+        }
+      }
+    })
+  
+    .controller('MainCtrl', function($scope) {
+        var cities = [
+          {label: 'Montreal', founded: new Date("17 May 1642"), members: 15},
+          {label: 'Toronto', founded: new Date("27 August 1793"), members: 10},
+          {label: 'Vancouver', founded: new Date("6 April 1886"), members: 5},
+          {label: 'Regina', founded: new Date("1 June 1882"), members: 0}
+        ];
+        
+        $scope.cities = cities;
+        
+        $scope.addNewMember = function (city) {
+          city.members++;
+        };
+        
+    });
+    
+</script>
+ 
+<div ng-controller="MainCtrl" class="ui">
+    <h1>Some Cities with JS Meetups</h1>
+    
+    <div class="city" 
+      ng-repeat="city in cities | orderBy:'members'" 
+      show-only="city.members > 0">
+      
+      <button ng-click="addNewMember(city)">Add Member to {{ city.label }}</button>
+      <city-card information="city"></city-card>
+      
+    </div>
+</div>
+
+<style>
+.city.ng-move {
+    transition: top 0.5s ease;
+    position: relative;
+    top: 111px;
+}
+
+.city.ng-move-active {
+    top: 0;
+}
+
+.city.ng-move + div {
+    transition: top 0.5s ease;
+    position: relative;
+    top: -111px;
+}
+
+.city.ng-move-active + div {
+    top: 0;
+}
+</style>
+
+<!-- 
+
+$scope.toggleRegina = function () {
+  var regina = cities[3];
+  if (regina.members)
+    regina.members = 0;
+  else 
+    regina.members = 1;
+}
+
+<button ng-click="toggleRegina()">Toggle Regina</button>
+
+-->

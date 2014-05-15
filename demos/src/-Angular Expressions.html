@@ -1,0 +1,83 @@
+<script src="bootstrapDemo.js"></script>
+
+<script type="text/javascript">
+  
+  angular.module('myApp', ['demo.handler'])
+    .controller('MainCtrl', function($scope) {
+        $scope.city = {
+            label: 'Montreal',
+            founded: new Date("17 May 1642"),
+            hasJS: true,
+            hasSpacePrograme: true,
+            pop: {
+              males: 100,
+              females: 100,
+              other: 4
+            },
+            countPopulation: function () {
+              return this.pop.males + this.pop.females + this.pop.other;
+            }
+        };
+    });
+</script>
+
+<div ng-controller="MainCtrl">
+  
+<pre>
+city.label
+->  {{ city.label }}
+  
+  
+city['label']
+->  {{ city['label'] }} 
+
+
+city.countPopulation()
+-> {{ city.countPopulation() }}
+
+
+(1 + 2 - 4 * 8 / 16) % 2
+->  {{ (1 + 2 - 4 * 8 / 16) % 2 }} 
+
+
+city.label | uppercase
+-> {{ city.label | uppercase }}
+
+
+city.founded | date:'fullDate'
+-> {{ city.founded | date:'fullDate' }}
+
+
+city.pop.females >= city.pop.males
+-> {{ city.pop.females >= city.pop.males }}
+
+
+[1, 2, 3]
+-> {{ [1, 2, 3] }}
+
+
+{one: 1, two: 2, three: 3}
+-> {{ {one: 1, two: 2, three: 3} }}
+
+
+city.nonExistantProperty
+-> {{ city.nonExistantProperty }}
+
+</pre>
+<hr />
+<p>Contreversial</p>
+<pre>
+
+city.hasJS ? 'Awesome' : 'Oh noes'
+->  {{ city.hasJS ? 'Awesome' : 'Oh noes' }} 
+ 
+ 
+(city.hasSpacePrograme || city.hasJS) && city.countPopulation()
+->  {{ (city.hasSpacePrograme || city.hasJS) && city.countPopulation() }}
+
+city.someProperty = 5
+-> {{ city.someProperty = 5 }}
+</pre>
+    
+
+</div>

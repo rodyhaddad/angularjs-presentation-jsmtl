@@ -1,0 +1,29 @@
+<script src="bootstrapDemo.js"></script>
+<script type="text/javascript">
+  angular.module('myApp', ['demo.handler'])
+    .controller('MainCtrl', function($scope) {
+        var city = {
+            label: 'Montreal'
+        };
+        
+        $scope.city = city;
+        
+        $scope.resetLabel = function () {
+          city.label = 'Montreal';
+        };
+        
+        $scope.alertLabel = function () {
+          alert(city.label);
+        };
+    });
+</script>
+
+<div ng-controller="MainCtrl" class="ui">
+  
+    <h1>Hello {{ city.label }}!</h1>
+    
+    <input type="text" ng-model="city.label" />
+    
+    <button ng-click="resetLabel()">Reset</button>
+    <button ng-click="alertLabel()">Alert Label</button>
+</div>

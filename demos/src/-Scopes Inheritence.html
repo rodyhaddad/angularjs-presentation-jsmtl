@@ -1,0 +1,33 @@
+<script src="bootstrapDemo.js"></script>
+
+<script type="text/javascript">
+
+  angular.module('myApp', ['demo.handler'])
+    .controller('ParentCtrl', function($scope) {
+        $scope.country = {
+            label: 'Canada'
+            // ...
+        };
+    })
+    .controller('ChildCtrl', function($scope) {
+        $scope.city = {
+            label: 'Montreal',
+            // ...
+        };
+    });
+</script>
+
+<div ng-controller="ParentCtrl">
+  <h1>Parent</h1>
+  Country: {{ country.label }} <br />
+  
+  <hr />
+  <div ng-controller="ChildCtrl">
+    <h2>Child</h2>
+    Country: {{ country.label }} <br />
+    City: {{ city.label }}
+  </div>
+  <hr />
+  
+  City: {{ city.label }}
+</div>

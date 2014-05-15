@@ -1,0 +1,105 @@
+// Just for presentation
+<script>
+  angular.module('app', ['rh.appSections'])
+    .controller('HomePage', function (AppSections) {
+      
+    })
+
+  angular.module('rh.appSections', [])
+    .service('AppSections', function () {
+      
+    })
+    .directive('sectionTitle', function () {
+      
+    })
+  
+</script>
+<div ng-repeat="section in sections">
+  <section-title for="section"></section-title>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ion-content 
+  on-scan-barcode="addProduct(barcode)">
+    
+  </ion-content>
+  
+<script>
+  app.directive('onScanBarcode', function () {
+    return {
+      link: function (scope, el, attr) {
+        window.BarcodeScanned = function (code) {
+          scope.$apply(function () {
+            scope.$eval(attr.onScanBarcode, {
+              barcode: code
+            });
+          });
+        }
+      }
+    };
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<input ng-model="searchTerm" 
+  auto-complete="searchByName(searchTerm)" />
+
+<script>
+  app.directive('autoComplete', function () {
+    return {
+      link: function (scope, el, attr) {
+        var items = scope.$eval(attr.autoComplete);
+        // ...
+      }
+    }
+  })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
